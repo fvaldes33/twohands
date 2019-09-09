@@ -49,7 +49,7 @@ const Game = (props) => {
   });
 
   const updateFirebaseRef = useCallback(
-    ({ outcome }) => {
+    (outcome) => {
       userRef.update({
         games: increment(1),
         lastGamePlayed: serverTimestamp()

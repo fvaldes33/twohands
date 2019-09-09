@@ -48,7 +48,7 @@ const Home = () => {
             displayName: authUser.displayName,
             email: authUser.email,
             avatar: authUser.photoURL
-          }).then(() => {
+          }, { merge: true }).then(() => {
             router.push('/game');
           })
         }
