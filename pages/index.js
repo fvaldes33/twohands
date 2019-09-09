@@ -7,7 +7,11 @@ const Home = () => {
   const [state, setState] = useState({ loading: false, loggedIn: false, error: null });
 
   useEffect(() => {
-    console.log('Home -> useEffect');
+    if (auth.currentUser) {
+      router.push('/game');
+      return;
+    }
+
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         console.log('Home -> useEffect -> authUser', authUser);

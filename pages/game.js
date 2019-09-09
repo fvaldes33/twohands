@@ -1,4 +1,6 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { useDocument } from 'react-firebase-hooks/firestore';
+import { db, increment, serverTimestamp } from '../util/firebase';
 import withAuth from '../util/auth';
 import Header from '../components/header';
 import Rock from '../components/rock';
@@ -23,6 +25,9 @@ const Game = (props) => {
 
   const { user } = props;
 
+  const userRef = db.doc(`players/${user.uid}`);
+  const [snapshot, loading, error] = useDocument(userRef);
+
   const [menu, showMenu] = useState(false);
   const ref = useRef();
   useOnClickOutside(ref, () => showMenu(false));
@@ -37,11 +42,38 @@ const Game = (props) => {
       score: 0,
       played: 'Pending',
     },
-    games: 0,
+    games: 1,
     winner: null,
     mode: MODES.start,
     type: TYPES.computer
   });
+
+  const updateFirebaseRef = useCallback(
+    ({ outcome }) => {
+      userRef.update({
+        games: increment(1),
+        lastGamePlayed: serverTimestamp()
+      });
+
+      if (outcome === 'player') {
+        userRef.update({ wins: increment(1) });
+      } else if (outcome === 'computer') {
+        userRef.update({ loses: increment(1) });
+      } else {
+        userRef.update({ ties: increment(1) });
+      }
+    },
+    [userRef]
+  );
+
+  useEffect(() => {
+    if (snapshot) {
+      const data = snapshot.data();
+      if (data) {
+        updateFirebaseRef(state.winner);
+      }
+    }
+  }, [state.games, state.winner]);
 
   const playGame = () => {
     showToast({ show: false, message: null });
@@ -160,7 +192,6 @@ const Game = (props) => {
     },
     [playGame, makeSelection]
   );
-
 
   // Add event listener using our hook
   useEventListener('keyup', handler);

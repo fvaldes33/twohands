@@ -18,9 +18,13 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+const increment = firebase.firestore.FieldValue.increment;
 
 export {
   auth,
   firebase,
-  db
+  db,
+  serverTimestamp,
+  increment
 };
