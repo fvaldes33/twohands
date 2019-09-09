@@ -104,6 +104,9 @@ const Menu = ({ playHuman, playComputer }) => {
         .List li[islink]:hover {
           background: #eee;
         }
+        @media (min-width: 320px) and (max-width: 480px) {
+          width: 90%;
+        }
       `}</style>
     </>
   );

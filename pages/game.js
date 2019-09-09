@@ -102,7 +102,7 @@ const Game = (props) => {
 
   const showOptions = () => {
     return (
-      <>
+      <div className="Selections">
         <span className="Selection" onClick={() => makeSelection('Rock')}>
           <Rock size="100" />
         </span>
@@ -112,7 +112,7 @@ const Game = (props) => {
         <span className="Selection" onClick={() => makeSelection('Scissors')}>
           <Scissors size="100" />
         </span>
-      </>
+      </div>
     );
   }
 
@@ -263,6 +263,14 @@ const Game = (props) => {
         }
         .Game-side--secondary {
           background: #00FFFF;
+        }
+        @media (min-width: 320px) and (max-width: 480px) {
+          .Game {
+            flex-direction: column;
+          }
+          .Game-side {
+            width: 100%;
+          }
         }
       `}</style>
     </>

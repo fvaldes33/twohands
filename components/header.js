@@ -96,6 +96,9 @@ const Header = ({ title }) => (
         line-height: 1;
         text-transform: uppercase;
       }
+      .Selections {
+        max-width: 90%;
+      }
       .Selection {
         cursor: pointer;
       }
@@ -107,13 +110,13 @@ const Header = ({ title }) => (
         transform: rotate(-5deg) scale(1.25);
       }
       .Toast {
-        background: rgba(255, 255, 255, 0.75);
+        background: rgba(255, 255, 255, 0.90);
         box-shadow: 0 4px 8px -4px rgba(0,0,0,0.5);
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
         padding: 16px 24px;
-        width: 90%;
+        width: 60%;
         max-width: 400px;
         position: fixed;
         z-index: 999;
@@ -135,6 +138,25 @@ const Header = ({ title }) => (
         opacity: 1;
         transform: translate3d(-50%, 0%, 0);
       }
+
+      @media (min-width: 320px) and (max-width: 480px) {
+        .Game-player {
+          top: 50%;
+          left: 16px;
+          transform-origin: center;
+          transform: translate3d(-45%, -50%, 0) rotate(-90deg);
+        }
+        .Selections {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          max-width: 80%;
+        }
+        .Selection {
+          transform: none;
+        }
+      }
+
       @keyframes loading {
         0% { transform: translate3d(-100%, 0, 0); }
         100% { transform: translate3d(100%, 0, 0); }
