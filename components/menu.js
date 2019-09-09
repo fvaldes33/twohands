@@ -1,7 +1,9 @@
 import React from 'react';
 import { auth } from '../util/firebase';
 
-const Menu = ({ playHuman, playComputer }) => {
+const Menu = ({ playHuman, playComputer, playerStats }) => {
+
+  const data = playerStats ? playerStats.data() : false;
 
   const handleLogout = () => {
     auth.signOut()
@@ -17,6 +19,26 @@ const Menu = ({ playHuman, playComputer }) => {
     <>
       <div className="Menu">
         <h3 className="Subheading">Two Hands | RPS</h3>
+        {data &&
+          <div className="Stats">
+            <div className="Stats-stat">
+              <h4>{data.games}</h4>
+              <span>Games</span>
+            </div>
+            <div className="Stats-stat">
+              <h4>{data.wins}</h4>
+              <span>Wins</span>
+            </div>
+            <div className="Stats-stat">
+              <h4>{data.loses}</h4>
+              <span>Loses</span>
+            </div>
+            <div className="Stats-stat">
+              <h4>{data.ties}</h4>
+              <span>Ties</span>
+            </div>
+          </div>
+        }
         <ul className="List">
           <li className="List-heading">
             Menu
@@ -58,6 +80,27 @@ const Menu = ({ playHuman, playComputer }) => {
         </ul>
       </div>
       <style jsx>{`
+        .Stats {
+          display: flex;
+          padding: 16px 0;
+          margin-bottom: 16px;
+          border-bottom: 1px solid #eee;
+        }
+        .Stats-stat {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          justify-content: center;
+        }
+        .Stats-stat span {
+          font-size: 0.75rem;
+          color: #262626;
+          letter-spacing: 1.5px;
+          line-height: 1;
+          padding: 0 8px;
+          text-transform: uppercase;
+        }
         .Menu {
           background: white;
           border-radius: 5px;
@@ -76,6 +119,7 @@ const Menu = ({ playHuman, playComputer }) => {
         }
         .Menu .Subheading {
           text-align: center;
+          margin-bottom: 0;
         }
         .List {
           margin: 0 0 16px;

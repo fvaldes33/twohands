@@ -235,6 +235,7 @@ const Game = (props) => {
             <Menu
               playHuman={playHuman}
               playComputer={playComputer}
+              playerStats={snapshot}
             />
           }
         </div>
