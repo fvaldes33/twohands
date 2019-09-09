@@ -85,6 +85,7 @@ const Menu = ({ playHuman, playComputer, playerStats }) => {
           padding: 16px 0;
           margin-bottom: 16px;
           border-bottom: 1px solid #eee;
+          width: 100%;
         }
         .Stats-stat {
           align-items: center;
@@ -92,13 +93,14 @@ const Menu = ({ playHuman, playComputer, playerStats }) => {
           flex-direction: column;
           flex: 1;
           justify-content: center;
+          min-width: 25%;
+          text-align: center;
         }
         .Stats-stat span {
           font-size: 0.75rem;
           color: #262626;
           letter-spacing: 1.5px;
           line-height: 1;
-          padding: 0 8px;
           text-transform: uppercase;
         }
         .Menu {
