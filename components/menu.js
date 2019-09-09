@@ -22,19 +22,19 @@ const Menu = ({ playHuman, playComputer, playerStats }) => {
         {data &&
           <div className="Stats">
             <div className="Stats-stat">
-              <h4>{data.games}</h4>
+              <h4>{data.games || 0}</h4>
               <span>Games</span>
             </div>
             <div className="Stats-stat">
-              <h4>{data.wins}</h4>
+              <h4>{data.wins || 0}</h4>
               <span>Wins</span>
             </div>
             <div className="Stats-stat">
-              <h4>{data.loses}</h4>
+              <h4>{data.loses || 0}</h4>
               <span>Loses</span>
             </div>
             <div className="Stats-stat">
-              <h4>{data.ties}</h4>
+              <h4>{data.ties || 0}</h4>
               <span>Ties</span>
             </div>
           </div>
